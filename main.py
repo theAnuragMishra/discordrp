@@ -2,19 +2,18 @@ import time
 import os
 
 try:
-    from pypresence import Presence  # The simple rich presence client in pypresence
+    from pypresence import Presence
     from dotenv import load_dotenv
     from InquirerPy import prompt
     from colorama import init, Fore
 except ImportError:
     os.system("pip install pypresence dotenv InquirerPy colorama")
-    from pypresence import Presence  # The simple rich presence client in pypresence
+    from pypresence import Presence
     from dotenv import load_dotenv
     from InquirerPy import prompt
     from colorama import init, Fore
+
 init(autoreset=True)
-
-
 def clsr(): return os.system('cls' if os.name == 'nt' else 'clear')
 
 
@@ -26,7 +25,7 @@ application_id = os.getenv('APPLICATION_ID')
 client_id = 1069249925994524783  # Put your Client ID in here
 
 
-def pp():
+def textart():
     clsr()
     print(f"""
 {Fore.RED}     _  _____  _____      _     ____  __     __  ____    ___   ____   _____ 
@@ -41,19 +40,19 @@ def pp():
     """)
 
 
-pp()
+textart()
 
-stylesheet = {
-    "questionmark": "#16C60C bold",
-    "question": "#E74856 bold",
-    "pointer": "#3A96DD",
-    "answer": "#E5E512"
+design = {
+    "questionmark": "#3FD536 bold",
+    "question": "#CB2B39 bold",
+    "pointer": "#2381C9",
+    "answer": "#C9C918"
 }
 t = int(time.time())
 
 
 def rpcData():
-    pp()
+    textart()
     dataIn = [
         {
             "type": "list",
@@ -77,7 +76,7 @@ def rpcData():
         }
 
     ]
-    data = prompt(dataIn, style=stylesheet)
+    data = prompt(dataIn, style=design)
     if data['torp'].startswith('Studying'):
         return data['subject'], data['topic'], "Studying Theory"
     else:
@@ -121,7 +120,7 @@ def update_presence():
 while True:
     print("\n")
     data = prompt({"type": "list", "name": "dat", "message": "What do you want to do?",
-                   "choices": ["Update rich presence", "Stop & Close"]}, style=stylesheet)
+                   "choices": ["Update rich presence", "Close"]}, style=design)
     if data['dat'] == "Update rich presence":
         update_presence()
     else:
