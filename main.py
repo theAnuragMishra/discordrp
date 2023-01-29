@@ -7,7 +7,7 @@ try:
     from InquirerPy import prompt
     from colorama import init, Fore
 except ImportError:
-    os.system("pip install pypresence dotenv InquirerPy colorama")
+    os.system("pip install pypresence python-dotenv InquirerPy colorama")
     from pypresence import Presence
     from dotenv import load_dotenv
     from InquirerPy import prompt
