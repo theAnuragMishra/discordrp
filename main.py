@@ -105,7 +105,7 @@ def update_presence():
 
     RPC.update(
         state=data[1].title(),
-        details=f"{data[2].title()} from {data[0].title()}",
+        details=f"{data[2].title()} from {data[0]}",
         start=t,
         large_image=large_image,
         large_text=large_text,
