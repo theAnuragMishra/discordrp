@@ -1,24 +1,133 @@
-from pypresence import Presence # The simple rich presence client in pypresence
 import time
 import os
-from dotenv import load_dotenv
+
+try:
+    from pypresence import Presence  # The simple rich presence client in pypresence
+    from dotenv import load_dotenv
+    from InquirerPy import prompt
+    from colorama import init, Fore
+except ImportError:
+    os.system("pip install pypresence dotenv InquirerPy colorama")
+    from pypresence import Presence  # The simple rich presence client in pypresence
+    from dotenv import load_dotenv
+    from InquirerPy import prompt
+    from colorama import init, Fore
+init(autoreset=True)
+
+
+def clsr(): return os.system('cls' if os.name == 'nt' else 'clear')
+
+
+clsr()
 
 load_dotenv()
 application_id = os.getenv('APPLICATION_ID')
 
 client_id = 1069249925994524783  # Put your Client ID in here
+
+
+def pp():
+    clsr()
+    print(f"""
+{Fore.RED}     _  _____  _____      _     ____  __     __  ____    ___   ____   _____ 
+{Fore.RED}    | || ____|| ____|    / \   |  _ \ \ \   / / |___ \  / _ \ |___ \ |___ / 
+{Fore.WHITE}    | ||  _|  |  _|     / _ \  | | | | \ \ / /    __) || | | |  __) |  |_ \ 
+{Fore.GREEN}| |_| || |___ | |___   / ___ \ | |_| |  \ V /    / __/ | |_| | / __/  ___) |
+{Fore.GREEN} \___/ |_____||_____| /_/   \_\|____/    \_/    |_____| \___/ |_____||____/ 
+ 
+ {Fore.WHITE} ----------
+ {Fore.RED} Developer: Anurag Mishra
+ {Fore.CYAN} Discord: Anurag#2993
+    """)
+
+
+pp()
+
+stylesheet = {
+    "questionmark": "#16C60C bold",
+    "question": "#E74856 bold",
+    "pointer": "#3A96DD",
+    "answer": "#E5E512"
+}
+t = int(time.time())
+
+
+def rpcData():
+    pp()
+    dataIn = [
+        {
+            "type": "list",
+            "name": "subject",
+            "message": "Select what you're doing",
+            "choices": ['HCV', 'Cengage', 'Marks', 'PW Modules', 'N Avasthi', 'MS Chauhan']
+        },
+        {
+            "type": "input",
+            "name": "topic",
+            "message": "What topic are you studying: ",
+            "validate": lambda res: len(res) > 0,
+            "invalid_message": "Input cannot be empty."
+        },
+
+        {
+            "type": "list",
+            "name": "torp",
+            "message": "Are you studying theory or doing practice?",
+            "choices": ["Studying Theory", "Practising"]
+        }
+
+    ]
+    data = prompt(dataIn, style=stylesheet)
+    if data['torp'].startswith('Studying'):
+        return data['subject'], data['topic'], "Studying Theory"
+    else:
+        return data['subject'], data['topic'], "Practising"
+
+
 RPC = Presence(client_id)  # Initialize the Presence client
 RPC.connect()  # Start the handshake loop
 
-RPC.update(state="Rich Presence using pypresence!") # Updates our presence
-t = int(time.time())
-while True:  # The presence will stay on as long as the program is running
+
+def update_presence():
+    data = rpcData()
+    try:
+        RPC.clear()
+    except Exception:
+        RPC.connect()  # This means that the connection already got disconnected, so attempt to start a new one
+    if data[0] == "PW Modules":
+        large_image = "pwm"
+    elif data[0] == "N Avasthi":
+        large_image = "na"
+    elif data[0] == "MS Chauhan":
+        large_image = "mschauhan"
+    else:
+        large_image = data[0].lower()
+    large_text = data[0].title()
+
     RPC.update(
-        large_image="cengage",
-        large_text="Practising calculus problems",
-        details="From Cengage",
-        state="Relations & Functions",
+        state=data[1].title(),
+        details=f"{data[2].title()} from {data[0].title()}",
         start=t,
-        buttons=[{"label":"Join me!","url":"https://discord.gg/er5QD69vqV"}]
+        large_image=large_image,
+        large_text=large_text,
+        buttons=[{"label": "Join me in studying!",
+                  "url": "https://discord.gg/er5QD69vqV"}]
     )
-    time.sleep(60)
+    print(f"{Fore.BLUE} >>> Rich Presence Updated!")
+    print(
+        f"{Fore.CYAN} >>> Leave this window open until you want to quit rich presence, you can keep it minimised")
+
+
+while True:
+    print("\n")
+    data = prompt({"type": "list", "name": "dat", "message": "What do you want to do?",
+                   "choices": ["Update rich presence", "Stop & Close"]}, style=stylesheet)
+    if data['dat'] == "Update rich presence":
+        update_presence()
+    else:
+        try:
+            RPC.close()
+        except Exception:
+            pass
+        print(f"{Fore.GREEN} >>> Rich Presence closed!")
+        break
