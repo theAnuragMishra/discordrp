@@ -10,3 +10,8 @@
 5. Type `python main.py` and press enter. Follow the instructions and get your rich presence running!
 
 You could also follow this short video tutorial for installation: https://youtu.be/AnoVK-lCHNU.
+
+## Usage
+
+1. Go to the directory by running `cd onedrive/desktop/discordrp`.
+2. Run `python main.py` and follow the instructions.
