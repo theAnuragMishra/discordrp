@@ -5,7 +5,7 @@
 
 ### Method 1
 
-    Just download the main.exe from the releases section in the right, save it in your desired location and you're done. The installation is done. All that you need to do now is double click to run the exe. Here's a tutorial for that https://youtube.com/...
+   Just download the main.exe from the releases section in the right, save it in your desired location and you're done. The installation is done. All that you need to do now is double click to run the exe. Here's a tutorial for that https://youtube.com/...
 
 ### Method 2 (for those who want to run with the source and not the exe)
 
