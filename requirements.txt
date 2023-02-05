@@ -1,0 +1,4 @@
+pypresence
+InquirerPy
+colorama
+python-dotenv
