@@ -35,6 +35,7 @@ def textart():
 {Fore.GREEN} \___/ |_____||_____| /_/   \_\|____/    \_/    |_____| \___/ |_____||____/ 
  
  {Fore.WHITE} ----------
+ {Fore.BLUE} Version: 1.0.2
  {Fore.RED} Developer: Anurag Mishra
  {Fore.CYAN} Discord: Anurag#2993
     """)
