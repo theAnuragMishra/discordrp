@@ -58,7 +58,7 @@ def rpcData():
             "type": "list",
             "name": "subject",
             "message": "Select what you're doing",
-            "choices": ['CATS','HCV', 'Cengage', 'Marks', 'PW Modules', 'N Avasthi', 'MS Chauhan']
+            "choices": ['CATS','CHAMP','HCV', 'Cengage', 'Marks', 'PW Modules', 'N Avasthi', 'MS Chauhan']
         },
         {
             "type": "input",
@@ -101,6 +101,8 @@ def update_presence():
         large_image = "mschauhan"
     elif data[0] == "CATS":
         large_image = "cats"
+    elif data[0] == "CHAMP":
+        large_image = "champ"
     else:
         large_image = data[0].lower()
     large_text = data[0].title()
